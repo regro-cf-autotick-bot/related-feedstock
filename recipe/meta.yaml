@@ -1,31 +1,28 @@
 {% set name = "related" %}
-{% set version = "0.7.2" %}
-{% set file_ext = "tar.gz" %}
-{% set hash_type = "sha256" %}
-{% set hash_value = "c345e6356875c45d3caa2b47db695081344da8eeaac98ad877675ceb1dc5a29d" %}
+{% set version = "0.7.3" %}
 
 package:
-  name: '{{ name|lower }}'
-  version: '{{ version }}'
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
-  '{{ hash_type }}': '{{ hash_value }}'
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 22a99ba805ba3ee6cdf46057accb3925ee2ed579202e5f5c6a648636b96b1490
 
 build:
   number: 0
   noarch: python
-  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   host:
-    - python
+    - python >=3.6
     - pip
     - setuptools
     - pytest-runner
   run:
-    - python
+    - python >=3.6
     - attrs
     - pyyaml
     - future
@@ -42,7 +39,7 @@ about:
   license_family: MIT
   license_file: LICENSE.txt
   summary: 'Related: Straightforward nested object models in Python'
-  description: "Related is a Python library for creating nested object models that can be serialized to and de-serialized from nested python dictionaries. When paired with other libraries (e.g. PyYAML), Related object models can be used to convert to and from nested data formats (e.g. JSON, YAML)."
+  description: Related is a Python library for creating nested object models that can be serialized to and de-serialized from nested python dictionaries. When paired with other libraries (e.g. PyYAML), Related object models can be used to convert to and from nested data formats (e.g. JSON, YAML).
   doc_url: https://github.com/genomoncology/related
   dev_url: https://github.com/genomoncology/related
 
