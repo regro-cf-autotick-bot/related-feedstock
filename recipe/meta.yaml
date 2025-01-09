@@ -7,22 +7,22 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 22a99ba805ba3ee6cdf46057accb3925ee2ed579202e5f5c6a648636b96b1490
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
     - setuptools
     - pytest-runner
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - attrs
     - pyyaml
     - future
@@ -30,6 +30,8 @@ requirements:
     - python-dateutil
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - related
 
